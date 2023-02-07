@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import './List.css'
 
 function List() {
 
