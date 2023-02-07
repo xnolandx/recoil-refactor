@@ -9,8 +9,8 @@ function App() {
     <div className='app-container'>
     <NewListItem />
     <ToDoList />
-    {/* <CompletedList />
-    <DeletedList /> */}
+    <CompletedList />
+    {/* <DeletedList /> */}
   </div>
   )
 }

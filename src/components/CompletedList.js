@@ -1,9 +1,14 @@
 import {completedListState} from '../ToDoListStates'
 import {useRecoilState} from 'recoil'
+import { useEffect } from 'react';
 
-function CompletedList() {
+function CompletedList(event) {
 
     const [completedList, setCompletedList] = useRecoilState(completedListState);
+
+
+
+console.log(event)
 
     return (
             <ul className="list-component-container">

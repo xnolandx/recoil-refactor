@@ -1,37 +1,23 @@
-import {toDoListState} from '../ToDoListStates'
-import {useRecoilState} from 'recoil'
+import {toDoListState, completedListState} from '../ToDoListStates'
+import {useRecoilState, useRecoilValue} from 'recoil'
+import CompletedList, {completedList} from './CompletedList'
 
 
-function ToDoList(newItem) {
+function ToDoList() {
     
-
-    const [list, setList] = useRecoilState(toDoListState);
-
-    if (newItem.length) {
-        console.log(newItem)
-    }
+    const list = useRecoilValue(toDoListState)
+    const [completedList, setCompletedList] = useRecoilState(completedListState);
     
-    // const handleAdd = (event) => {
-    //     if (event.key === 'Enter' && newItem.length > 0) {
-    //       setList([...list, newItem])
-    //       setNewItem('')
-    //     }
-    // };
-
-
-    let handleComplete = (event) => {
-        // let completeListToAdd = [...completedList]
-        // let listToSplice = [...list]
-        // list.forEach((item, index) => {
-        //     if (event.target.value == index) {
-        //         setCompletedItem(item)
-        //         completeListToAdd.push(item)
-        //         setCompletedList(completeListToAdd)
-        //         listToSplice.splice(index, 1)
-        //         setList(listToSplice)
-        //     }
-        // })
+    const handleComplete = (event) => {
+        list.forEach((item, index) => {
+            if (event.target.value == index) {
+                setCompletedList([...completedList, item])
+            }
+        })
     };
+
+
+
 
     let handleDelete = (event) => {
         // let listToDelete = [...deletedList]
@@ -80,14 +66,15 @@ function ToDoList(newItem) {
                     return (
                         <>
                         <li className="list-div" key={index} value={index}>
-                        <button className='crossoff-list-item' value={index} onClick={(event) => handleComplete(event)}>✅ </button>
-                        <button className='delete-list-item' value={index} onClick={(event) => handleDelete(event)}>🗑️ </button>
-                        <div className="list-item" > {item} </div>
+                            <button className='crossoff-list-item' value={index} onClick={(event) => handleComplete(event)}>✅ </button>
+                            {/* <button className='delete-list-item' value={index} onClick={(event) => handleDelete(event)}>🗑️ </button> */}
+                            <div className="list-item" key={index}> {item} </div>
                         </li>
                         </>
                     )
                 }) :
                 <div className="empty-list"></div>
+                
             }
         </ul>
 
